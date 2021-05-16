@@ -1,4 +1,5 @@
 import './Navbar.css'
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
@@ -10,11 +11,12 @@ function Navbar() {
       {/* links */}
       <ul className="navbar__links">
         <li>
-          <Link>
+          <Link to="/cart">
             
           </Link>
         </li>
       </ul>
+
       {/* hamburger menu */}
     </nav>
   )
