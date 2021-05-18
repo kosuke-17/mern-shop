@@ -22,12 +22,9 @@ const HomeScreen = () => {
     <h2 className="homescreen__title">最新商品</h2>
 
     <div className="homescreen__products">
-      <Product />
-      <Product />
-      <Product />
-      <Product />
-      <Product />
-      <Product />
+      {loading ? <h2>loading...</h2> : error ? <h2>{error}</h2> : products.map(product => (
+        <Product />
+      ))}
     </div>
   </div>
   )
