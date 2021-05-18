@@ -1,13 +1,20 @@
 import './HomeScreen.css';
+import Product from '../components/Product';
 
 const HomeScreen = () => {
-  return <div className="homescreen">
+  return (<div className="homescreen">
     <h2 className="homescreen__title">最新商品</h2>
 
     <div className="homescreen__products">
-      {/* <Product /> */}
+      <Product />
+      <Product />
+      <Product />
+      <Product />
+      <Product />
+      <Product />
     </div>
-  </div>;
+  </div>
+  )
 };
 
 export default HomeScreen;
