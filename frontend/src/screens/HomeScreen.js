@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Product from '../components/Product';
 
 //Actions
-import { getProducts as listProducts } from '../redux/actions/productActions'
+import { getProducts as listProducts } from '../redux/actions/productActions';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -18,16 +18,29 @@ const HomeScreen = () => {
     dispatch(listProducts());
   }, [dispatch]);
 
-  return (<div className="homescreen">
-    <h2 className="homescreen__title">最新商品</h2>
-
-    <div className="homescreen__products">
-      {loading ? <h2>loading...</h2> : error ? <h2>{error}</h2> : products.map(product => (
-        <Product />
-      ))}
+  return (
+    <div className="homescreen">
+      <h2 className="homescreen__title">最新商品</h2>
+      <div className="homescreen__products">
+        {loading ? (
+          <h2>Loading...</h2>
+        ) : error ? (
+          <h2>{error}</h2>
+        ) : (
+          products.map((product) => (
+            <Product
+              key={product._id}
+            productId={product._id}
+              name={product.name}
+              price={product.price}
+              description={product.description}
+              imageUrl={product.imageUrl}
+            />
+          ))
+        )}
+      </div>
     </div>
-  </div>
-  )
+  );
 };
 
 export default HomeScreen;
