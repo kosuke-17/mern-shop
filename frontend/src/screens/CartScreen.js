@@ -16,11 +16,19 @@ const CartScreen = () => {
 
   const qtyChangeHandler = (id, qty) => {
     dispatch(addToCart(id, qty))
-  }
+  };
 
   const removeHandler = (id) => {
     dispatch(removeFromCart(id));
-  }
+  };
+
+  const getCardCount = () => {
+    return cartItems.reduce((qty, item) => Number(item.qty) + qty, 0)
+  };
+
+  const getCartSubTotal = () => {
+    return cartItems.reduce((price, item) => item.price * item.qty + price, 0)
+  };
 
   return <div className="cartscreen">
     <div className="cartscreen_left">
@@ -41,8 +49,8 @@ const CartScreen = () => {
     </div>
     <div className="cartscreen__right">
       <div className="cartscreen__info">
-        <p>(0)個</p>
-        <p>小計 20000円</p>
+        <p>({ getCardCount() })個</p>
+        <p>小計 ${getCartSubTotal().toFixed()}</p>
       </div>
       <div>
         <button>会計へ進む</button>
