@@ -1,14 +1,26 @@
 import './CartScreen.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom'
 
 // compornents
 import CartItem from '../components/CartItem';
 
 const CartScreen = () => {
+  const dispatch = useDispatch();
+  
+  const cart = useSelector(state => state.cart);
+  const { cartItems } = cart;
+
   return <div className="cartscreen">
     <div className="cartscreen_left">
       <h2>買い物かご</h2>
-
-      <CartItem />
+        { cartItems.length === 0 ? (
+          <div>
+            あなたのカートは空です <Link to="/">戻る</Link>
+          </div>
+        ) : (
+          cartItems.map((item) => <CartItem item={item} />)
+        )}
     </div>
     <div className="cartscreen__right">
       <div className="cartscreen__info">

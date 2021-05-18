@@ -17,48 +17,58 @@ const ProductScreen = ({ match, history }) => {
     if (product && match.params.id !== product._id) {
       dispatch(getProductDetails(match.params.id));
     }
-  }, [dispatch, product, match]);
+  }, [dispatch, match, product]);
+
+  const addToCartHandler = () => {
+    dispatch(addToCart(product._id, qty));
+    history.push("/cart");
+  };
 
   return <div className="productscreen">
       {loading ? <h2>Loading...</h2> : error ? <h2>{error}</h2> : (
         <>
-         <div className="productscreen__left">
-        <div className="left__image">
-          <img src={product.imageUrl} alt={product.name} />
-        </div>
-        <div className="left__info">
-          <p className="left__name">{product.name}</p>
-          <p>価格：${product.price}</p>
-          <p>商品説明：{product.description}</p>
-        </div>
-      </div>
-      <div className="productscreen__right">
-        <div className="right__info">
-          <p>
-            価格： <span>${product.price}</span>
-          </p>
-          <p>
-            在庫： <span>{product.countInStock > 0 ? "あり" : "なし"}</span>
-          </p>
-          <p>
-            数量
-            <select value={qty} onChange={(e) => setQty(e.target.value)}>
-              {[...Array(product.countInStock).keys()].map((x) => (
-                <option key={x+1} value={x+1}>
-                  {x+1}
-                </option>
-              ))}
-            </select>
-          </p>
-          <p>
-            <button type="button">カートに入れる</button>
-          </p>
-        </div>
-      </div>
+          <div className="productscreen__left">
+            <div className="left__image">
+              <img src={product.imageUrl} alt={product.name} />
+            </div>
+            <div className="left__info">
+              <p className="left__name">{product.name}</p>
+              <p>価格：${product.price}</p>
+              <p>商品説明：{product.description}</p>
+            </div>
+          </div>
+          <div className="productscreen__right">
+            <div className="right__info">
+              <p>
+                価格：
+                <span>${product.price}</span>
+              </p>
+              <p>
+                在庫：
+                <span>
+                  {product.countInStock > 0 ? "あり" : "なし"}
+                </span>
+              </p>
+              <p>
+                  数量
+                <select value={qty} onChange={(e) => setQty(e.target.value)}>
+                  {[...Array(product.countInStock).keys()].map((x) => (
+                    <option key={x + 1} value={x + 1}>
+                      {x + 1}
+                    </option>
+                  ))}
+                </select>
+              </p>
+              <p>
+                <button type="button" onClick={addToCartHandler}>
+                  カートに入れる
+                </button>
+              </p>
+            </div>
+          </div>
         </>
       )}
     </div>
 };
-
 
 export default ProductScreen;
