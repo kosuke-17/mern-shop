@@ -21,11 +21,16 @@ const ProductScreen = ({ match, history }) => {
 
   const addToCartHandler = () => {
     dispatch(addToCart(product._id, qty));
-    history.push("/cart");
+    history.push(`/cart`);
   };
 
-  return <div className="productscreen">
-      {loading ? <h2>Loading...</h2> : error ? <h2>{error}</h2> : (
+  return (
+    <div className="productscreen">
+      {loading ? (
+        <h2>Loading...</h2>
+      ) : error ? (
+        <h2>{error}</h2>
+      ) : (
         <>
           <div className="productscreen__left">
             <div className="left__image">
@@ -69,6 +74,7 @@ const ProductScreen = ({ match, history }) => {
         </>
       )}
     </div>
+  );
 };
 
 export default ProductScreen;
